@@ -4,7 +4,7 @@
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git@github.com:candyboot/task-runner.git"
+    "url": "git+ssh://git@github.com/candyboot/task-runner.git"
   },
   "license": "ISC",
   "author": "",
