@@ -13,7 +13,7 @@ export type ServeOptions = {
 };
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
-const PUBLIC_DIR = join(__dirname, "../public");
+const PUBLIC_DIR = join(__dirname, "../dashboard");
 
 const MIME: Record<string, string> = {
   ".html": "text/html; charset=utf-8",

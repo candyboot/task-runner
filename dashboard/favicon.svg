@@ -1,0 +1,177 @@
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1280"
+        height="1280"
+        viewBox="0 0 1280 1280"
+        fill="none"
+>
+  <defs>
+    <!-- 外部 C 形渐变 -->
+    <linearGradient
+            id="shellGradient"
+            x1="390"
+            y1="112"
+            x2="691"
+            y2="1171"
+            gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#2BD8AD"/>
+      <stop offset="0.42" stop-color="#2AC9C7"/>
+      <stop offset="0.72" stop-color="#259FDE"/>
+      <stop offset="1" stop-color="#197BFA"/>
+    </linearGradient>
+
+    <!-- 箭头深色渐变 -->
+    <linearGradient
+            id="arrowGradient"
+            x1="760"
+            y1="424"
+            x2="837"
+            y2="847"
+            gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#06172D"/>
+      <stop offset="0.48" stop-color="#071C36"/>
+      <stop offset="1" stop-color="#092440"/>
+    </linearGradient>
+
+    <!-- 小箭头渐变 -->
+    <linearGradient
+            id="smallArrowGradient"
+            x1="430"
+            y1="509"
+            x2="492"
+            y2="735"
+            gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#06172D"/>
+      <stop offset="1" stop-color="#092440"/>
+    </linearGradient>
+
+    <!-- 主体轻微阴影 -->
+    <filter
+            id="shellShadow"
+            x="-8%"
+            y="-8%"
+            width="116%"
+            height="120%"
+            color-interpolation-filters="sRGB"
+    >
+      <feDropShadow
+              dx="0"
+              dy="4"
+              stdDeviation="7"
+              flood-color="#3E789A"
+              flood-opacity="0.07"
+      />
+    </filter>
+
+    <!-- 箭头轻微阴影 -->
+    <filter
+            id="arrowShadow"
+            x="-15%"
+            y="-15%"
+            width="135%"
+            height="140%"
+            color-interpolation-filters="sRGB"
+    >
+      <feDropShadow
+              dx="3"
+              dy="5"
+              stdDeviation="4"
+              flood-color="#122A44"
+              flood-opacity="0.12"
+      />
+    </filter>
+  </defs>
+
+  <!-- 白色背景 -->
+  <rect width="1280" height="1280" fill="#FFFFFF"/>
+
+  <!-- 外部 C 形主体 -->
+  <path
+          d="
+      M548 109
+      C282 109 66 347 66 640
+      C66 934 282 1172 548 1172
+      H789
+      C875 1172 952 1134 1009 1071
+      C1028 1050 1028 1020 1008 999
+      L919 909
+      C900 889 874 887 856 908
+      L836 933
+      C814 958 787 970 751 970
+      H548
+      C385 970 253 823 253 640
+      C253 457 385 310 548 310
+      H751
+      C790 310 816 324 839 349
+      L856 367
+      C873 384 899 381 915 365
+      L1007 274
+      C1025 257 1027 229 1012 211
+      C953 145 874 109 789 109
+      H548
+      Z
+    "
+          fill="url(#shellGradient)"
+          filter="url(#shellShadow)"
+  />
+
+  <!-- 小箭头：闭合轮廓路径 -->
+  <path
+          d="
+      M448 516
+      L535 604
+      C545 614 545 631 535 641
+      L448 728
+      C438 738 422 738 412 728
+      C402 718 402 701 412 691
+      L478 625
+      C479 624 479 622 478 621
+      L412 553
+      C402 543 402 527 412 517
+      C422 507 438 506 448 516
+      Z
+    "
+          fill="url(#smallArrowGradient)"
+          filter="url(#arrowShadow)"
+  />
+
+  <!-- 下划线：精确胶囊轮廓 -->
+  <path
+          d="
+      M585 705
+      H683
+      C697 705 708 716 708 730
+      C708 744 697 755 683 755
+      H585
+      C571 755 560 744 560 730
+      C560 716 571 705 585 705
+      Z
+    "
+          fill="url(#smallArrowGradient)"
+          filter="url(#arrowShadow)"
+  />
+
+  <!-- 大箭头：独立轮廓，优化内角与圆头 -->
+  <path
+          d="
+      M867 437
+      L1050 598
+      C1061 607 1067 620 1067 634
+      C1067 648 1061 661 1050 671
+      L869 833
+      C850 850 820 851 801 833
+      C782 815 782 785 800 765
+      L923 641
+      C927 637 927 631 923 627
+      L800 510
+      C782 492 783 462 801 442
+      C818 422 847 419 867 437
+      Z
+    "
+          fill="url(#arrowGradient)"
+          filter="url(#arrowShadow)"
+  />
+</svg>
