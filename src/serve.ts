@@ -1,5 +1,6 @@
 import { readFile, access } from "node:fs/promises";
 import { join, extname } from "node:path";
+import { networkInterfaces } from "node:os";
 import { fileURLToPath } from "node:url";
 import { serve as honoServe } from "@hono/node-server";
 import { TaskManager } from "./task-manager";
@@ -78,5 +79,18 @@ export async function serve(options: ServeOptions = {}): Promise<void> {
   process.on("SIGTERM", shutdown);
 
   honoServe({ fetch: app.fetch, port });
-  console.log(`[server] 正在监听端口 ${port}`);
+
+  const localUrl = `http://localhost:${port}`;
+  const ifaces = networkInterfaces();
+  const lan = Object.values(ifaces)
+    .flat()
+    .find((i) => i && i.family === "IPv4" && !i.internal);
+  const lanUrl = lan ? `http://${lan.address}:${port}` : null;
+
+  console.log(`\n[server] 运行中：`);
+  console.log(`  本地：\x1b]8;;${localUrl}\x1b\\${localUrl}\x1b]8;;\x1b\\`);
+  if (lanUrl) {
+    console.log(`  局域网：\x1b]8;;${lanUrl}\x1b\\${lanUrl}\x1b]8;;\x1b\\`);
+  }
+  console.log();
 }
