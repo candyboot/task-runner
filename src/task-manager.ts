@@ -29,7 +29,7 @@ export type TaskDefinition = {
 };
 
 type RunningState = {
-  timer: ReturnType<typeof setInterval> | undefined;
+  timer: ReturnType<typeof setTimeout> | undefined;
   startedAt: Date;
   ticks: number;
 };
@@ -138,6 +138,11 @@ export class TaskManager {
     const interval = def.intervalMs ?? DEFAULT_INTERVAL;
     const state: RunningState = { timer: undefined, startedAt: new Date(), ticks: 0 };
 
+    const scheduleNext = () => {
+      if (!this.running.has(id)) return;
+      state.timer = setTimeout(runTick, interval);
+    };
+
     const runTick = async () => {
       state.ticks += 1;
       try {
@@ -145,6 +150,7 @@ export class TaskManager {
       } catch (err) {
         console.error(`[${id}] tick 执行出错`, err);
       }
+      if (interval !== -1) scheduleNext();
     };
 
     def.onStart?.(ctx);
@@ -154,7 +160,6 @@ export class TaskManager {
       runTick().then(() => this.stop(id));
     } else {
       runTick();
-      state.timer = setInterval(runTick, interval);
     }
 
     return { started: true };
@@ -166,7 +171,7 @@ export class TaskManager {
     const state = this.running.get(id);
     if (!state) return { stopped: false, reason: "not-running" };
 
-    if (state.timer !== undefined) clearInterval(state.timer);
+    if (state.timer !== undefined) clearTimeout(state.timer);
     this.running.delete(id);
     def.onStop?.(this.makeContext(id));
     return { stopped: true };
