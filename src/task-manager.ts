@@ -194,7 +194,14 @@ export class TaskManager {
   }
 
   list(): TaskStatus[] {
-    return [...this.registry.keys()].map((id) => this.status(id)!);
+    return [...this.registry.keys()]
+      .map((id) => this.status(id)!)
+      .sort((a, b) => {
+        const aRunning = a.status === "running" ? 0 : 1;
+        const bRunning = b.status === "running" ? 0 : 1;
+        if (aRunning !== bRunning) return aRunning - bRunning;
+        return a.id.localeCompare(b.id);
+      });
   }
 
   stopAll(): void {
